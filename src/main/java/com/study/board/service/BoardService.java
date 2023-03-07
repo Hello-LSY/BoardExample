@@ -4,8 +4,11 @@ import com.study.board.entity.Board;
 import com.study.board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BoardService {
@@ -14,7 +17,21 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     //글 작성 처리
-    public void write(Board board){
+    public void write(Board board, MultipartFile file) throws Exception{
+
+        //경로지정
+        String projectPath = System.getProperty("user.dir") + "\\src\\main\\webapp";
+
+        //랜덤 uuid 생성
+        UUID uuid = UUID.randomUUID();
+
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        //파일 넣어줄 객체 생성
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+
+        board.setFilename(fileName);
+        board.setFilepath("/webapp/" + fileName);
 
         boardRepository.save(board);
     }
