@@ -38,14 +38,15 @@ public class BoardController {
     @GetMapping("/board/list")
     public String boardList(Model model, @PageableDefault(page=0, size=10, sort="id", direction = Sort.Direction.DESC) Pageable pageable
                             , String searchKeyword){
-
+        //가져올 페이지 목록
         Page<Board> list = null;
 
-
+        //검색어가 없으면 그냥 페이지를 만들고
         if(searchKeyword ==null) {
             list = boardService.boardList(pageable);
         }
         else{
+            //검색어가 있다면 검색어가 필터된 페이지를 만듬
             list = boardService.boardSearchList(searchKeyword, pageable);
 
         }

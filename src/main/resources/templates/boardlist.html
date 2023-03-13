@@ -9,15 +9,16 @@
              width : 500px;
              margin : 0 auto;
              margin-top : 40px;
-    }
-
-
-
+        }
 </style>
-
 <body>
-
 <div class="layout">
+    <form th:action="@{/user/signup}" method="get">
+        <button type="submit">회원가입</button>
+    </form>
+    <form th:action="@{/user/login}" method="get">
+        <button type="submit">로그인</button>
+    </form>
     <table>
         <thead>
         <tr>
@@ -26,7 +27,6 @@
         </tr>
         </thead>
         <tbody>
-
         <tr th:each="board : ${list}">
             <td th:text="${board.id}"></td>
             <td>
@@ -40,7 +40,6 @@
         <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page-1}, searchKeyword = ${param.searchKeyword})}"
            th:text="${page}"></a>
         <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
-
     </th:block>
     <form th:action="@{/board/write}" method="get">
         <button type="submit">글쓰기</button>

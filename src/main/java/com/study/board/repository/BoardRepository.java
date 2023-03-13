@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     //findBy(칼럼이름)Containing 명령규칙으로 칼럼이름에 키워드가 포함된것을 찾음
-    Page<Board> findByTitleContaining(String searchKeywordm, Pageable pageable);
+    Page<Board> findByTitleContaining(String searchKeyword, Pageable pageable);
 }
